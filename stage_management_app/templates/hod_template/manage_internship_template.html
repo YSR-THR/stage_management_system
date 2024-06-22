@@ -1,0 +1,76 @@
+<!-- manage_internship_template.html --->
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Gérer Les Stages
+{% endblock page_title %}
+{% block main_content %}
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+       <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Details Des Stages</h3>
+            <div class="card-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Domaine</th>
+                  <th>Type D'Organization</th>
+                  <th>Taille De L'Organization </th>
+                  <th>Lieu</th>
+                  <th>Date De Début</th>
+                  <th>Date De Fin</th>
+                  <th>Durée (en semaines)</th>
+                  <th>Contacts</th>
+                  <th>Sujet</th>
+                  <th>Étudiant</th>
+                  <th>Commentaires Supplémentaires</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for internship in internships %}
+                <tr>
+                  <td>{{ internship.id }}</td>
+                  <td>{{ internship.domain }}</td>
+                  <td>{{ internship.organization_type }}</td>
+                  <td>{{ internship.organization_size }}</td>
+                  <td>{{ internship.location }}</td>
+                  <td>{{ internship.start_date }}</td>
+                  <td>{{ internship.end_date }}</td>
+                  <td>{{ internship.duration }}</td>
+                  <td>{{ internship.contacts }}</td>
+                  <td>{{ internship.topic }}</td>
+                  <td>{{ internship.student_id.admin.first_name }} {{ internship.student_id.admin.last_name }}</td>
+                  <td>{{ internship.additional_comments }}</td>>
+                  <td><a href="/edit_internship/{{ internship.id }}" class="btn btn-success">Modifier</a>
+                  <a href="/delete_internship/{{ internship.id }}" class="btn btn-danger">Supprimer</a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+{% endblock main_content %}

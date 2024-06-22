@@ -1,0 +1,42 @@
+<!-- student_template/student_assignments.html -->
+{% extends 'student_template/base_template.html' %}
+{% block page_title %}
+Affectation De L'Étudiant
+{% endblock page_title %}
+{% block main_content %}
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Votre Affectation</h3>
+          </div>
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Stage</th>
+                  <th>Tuteur</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for assignment in assignments %}
+                  <tr>
+                    <td>{{ assignment.id }}</td>
+                    <td>{{ assignment.internship.topic }}</td>
+                    <td>{{ assignment.staff.admin.first_name }} {{ assignment.staff.admin.last_name }}</td>
+                    <td>{{ assignment.status }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main_content %}

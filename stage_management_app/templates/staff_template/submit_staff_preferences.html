@@ -1,0 +1,67 @@
+{% extends 'staff_template/base_template.html' %}
+
+{% block page_title %}
+Soumettre les Préférences du Personnel
+{% endblock page_title %}
+
+{% block main_content %}
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Soumettre Préférences</h3>
+          </div>
+          <form method="post">
+            {% csrf_token %}
+            <div class="card-body">
+              {{ form.as_p }}
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Soumettre</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Stages Disponibles et Leurs Détails</h3>
+          </div>
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Domaine</th>
+                    <th>Sujet</th>
+                    <th>Date de Début</th>
+                    <th>Date de Fin</th>
+                    <th>Étudiant</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for internship in internships %}
+                    <tr>
+                      <td>{{ internship.domain }}</td>
+                      <td>{{ internship.topic }}</td>
+                      <td>{{ internship.start_date }}</td>
+                      <td>{{ internship.end_date }}</td>
+                      <td>{{ internship.student_id.admin.get_full_name }}</td>
+                    </tr>
+                  {% empty %}
+                    <tr>
+                      <td colspan="5">Aucun stage disponible</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main_content %}

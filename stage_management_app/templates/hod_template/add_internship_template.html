@@ -1,0 +1,96 @@
+<!-- add_internship_template.html --->
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Ajouter un Stage
+{% endblock page_title %}
+{% block main_content %}
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Ajouter un Stage</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form role="form" action="/add_internship_save" method="post">
+              {% csrf_token %}
+            <div class="card-body">
+              <div class="form-group">
+                <label>Domaine</label>
+                <input type="text" class="form-control" name="domain" placeholder="">
+              </div>
+              <div class="form-group">
+                <label>Type d'Organisation</label>
+                <input type="text" class="form-control" name="organization_type" placeholder="">
+              </div>
+              <div class="form-group">
+                <label>Taille de l'Organisation</label>
+                <input type="text" class="form-control" name="organization_size" placeholder="">
+              </div>
+              <div class="form-group">
+                <label>Lieu</label>
+                <input type="text" class="form-control" name="location" placeholder="">
+              </div>
+              <div class="form-group">
+                <label>Date de Début</label>
+                <input type="date" class="form-control" name="start_date">
+              </div>
+              <div class="form-group">
+                <label>EDate de Fin</label>
+                <input type="date" class="form-control" name="end_date">
+              </div>
+              <div class="form-group">
+                <label>Durée (en semaines)</label>
+                <input type="number" class="form-control" name="duration" placeholder="">
+              </div>
+              <div class="form-group">
+                <label>Contacts</label>
+                <input type="text" class="form-control" name="contacts" placeholder="">
+              </div>
+              <div class="form-group">
+                <label>Sujet</label>
+                <textarea class="form-control" name="topic" placeholder=""></textarea>
+              </div>
+              <div class="form-group">
+                <label>Étudiant</label>
+                <select class="form-control" name="student_id">
+                  {% for student in students %}
+                    <option value="{{ student.id }}">{{ student.admin.first_name }} {{ student.admin.last_name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Commentaires Supplémentaire</label>
+                <textarea class="form-control" name="additional_comments" placeholder=""></textarea>
+              </div>
+              <div class="form-group">
+                  {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                    <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                    {% endif %}
+                    {% if message.tags == 'success' %}
+                    <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                    {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary btn-block">Add Internship</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+      </div>
+      </div>
+  </div>
+</section>
+<!-- /.content -->
+{% endblock main_content %}

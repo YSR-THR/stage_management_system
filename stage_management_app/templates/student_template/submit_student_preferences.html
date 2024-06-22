@@ -1,0 +1,65 @@
+{% extends 'student_template/base_template.html' %}
+{% block page_title %}
+Soumettre les Préférences Étudiants
+{% endblock page_title %}
+{% block main_content %}
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Soumettre Préférences</h3>
+          </div>
+          <form method="post">
+            {% csrf_token %}
+            <div class="card-body">
+              {{ form.as_p }}
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Soumettre</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Tuteurs Disponibles et Leurs UE</h3>
+          </div>
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Nom du Tuteur</th>
+                  <th>UE Enseignées</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for staff in staffs %}
+                  <tr>
+                    <td>{{ staff.admin.get_full_name }}</td>
+                    <td>
+                      <ul>
+                        {% for subject in staff.subjects %}
+                          <li>{{ subject.subject_name }}</li>
+                        {% empty %}
+                          <li>Aucune UE assignée</li>
+                        {% endfor %}
+                      </ul>
+                    </td>
+                  </tr>
+                {% empty %}
+                  <tr>
+                    <td colspan="2">Aucun tuteur disponible</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main_content %}

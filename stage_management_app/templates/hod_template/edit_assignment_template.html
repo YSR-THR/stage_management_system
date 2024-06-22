@@ -1,0 +1,71 @@
+<!-- edit_assignment_template.html --->
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Edit Assignment | Assignment ID : {{ assignment.id }}
+{% endblock page_title %}
+{% block main_content %}
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Edit Assignment</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form role="form" action="/edit_assignment_save" method="post">
+              {% csrf_token %}
+            <div class="card-body">
+              <div class="form-group">
+                <label>Student</label>
+                <select class="form-control" name="student">
+                    {% for student in students %}
+                      <option value="{{ student.id }}" {% if student.id == assignment.student.id %}selected{% endif %}>{{ student.first_name }} {{ student.last_name }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Internship</label>
+                <select class="form-control" name="internship">
+                    {% for internship in internships %}
+                      <option value="{{ internship.id }}" {% if internship.id == assignment.internship.id %}selected{% endif %}>{{ internship.title }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Staff</label>
+                <select class="form-control" name="staff">
+                    {% for staff in staffs %}
+                      <option value="{{ staff.id }}" {% if staff.id == assignment.staff.id %}selected{% endif %}>{{ staff.first_name }} {{ staff.last_name }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+               <div class="form-group">
+                  {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                    <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                    {% endif %}
+                    {% if message.tags == 'success' %}
+                    <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                    {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary btn-block">Save Assignment</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+      </div>
+      </div>
+  </div>
+</section>
+<!-- /.content -->
+{% endblock main_content %}

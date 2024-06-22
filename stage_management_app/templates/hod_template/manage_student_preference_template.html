@@ -1,0 +1,52 @@
+<!-- manage_student_preference_template.html --->
+
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Gérer Les Preferences Des EtudiantS
+{% endblock page_title %}
+{% block main_content %}
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Details Des Preferences</h3>
+          </div>
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nom De L'Etudiant</th>
+                  <th>Nom Du Tuteur</th>
+                  <th>Rang</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for preference in preferences %}
+                <tr>
+                  <td>{{ preference.id }}</td>
+                  <td>{{ preference.student.admin.first_name }} {{ preference.student.admin.last_name }}</td>
+                  <td>{{ preference.staff.admin.first_name }} {{ preference.staff.admin.last_name }}</td>
+                  <td>{{ preference.rank }}</td>
+                  <td>
+                    <a href="{% url 'edit_student_preference' preference.id %}" class="btn btn-success">Modifier</a>
+                    <a href="{% url 'delete_student_preference' preference.id %}" class="btn btn-danger">Supprimer</a>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="5">No preferences found.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

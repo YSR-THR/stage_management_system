@@ -1,0 +1,243 @@
+{% load static %}
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  {% url 'admin_home' as admin_home %}
+  <a href="admin_home" class="brand-link">
+    <img src="{% static "dist/img/UPJVLogo.png" %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">Stage Manager</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="{% static "dist/img/user2-160x160.jpg" %}" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">{{ user.username }}</a>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+        <li class="nav-item">
+          {% url 'admin_home' as admin_home %}
+          <a href="{{ admin_home }}" class="nav-link {% if request.path == admin_home %} active {% endif %}">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Tableau de bord
+            </p>
+          </a>
+        </li>
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              Tuteurs
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              {% url 'add_staff' as add_staff %}
+              <a href="{{ add_staff }}" class="nav-link {% if request.path == add_staff %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ajouter Tuteur</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manage_staff' as manage_staff %}
+              {% url 'edit_staff' staff_id as edit_staff %}
+              <a href="{{ manage_staff }}" class="nav-link {% if request.path == manage_staff or request.path == edit_staff %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Gérer Tuteurs</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user-graduate"></i>
+            <p>
+              Étudiants
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              {% url 'add_student' as add_student %}
+              <a href="{{ add_student }}" class="nav-link {% if request.path == add_student %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ajouter Étudiant</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manage_student' as manage_student %}
+              {% url 'edit_student' student_id as edit_student %}
+              <a href="{{ manage_student }}" class="nav-link {% if request.path == manage_student or request.path == edit_student %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Gérer Étudiants</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-book"></i>
+            <p>
+              Formations
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              {% url 'add_course' as add_course %}
+              <a href="{{ add_course }}" class="nav-link {% if request.path == add_course %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ajouter Formation</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manage_course' as manage_course %}
+              {% url 'edit_course' course_id as edit_course %}
+              <a href="{{ manage_course }}" class="nav-link {% if request.path == manage_course or request.path == edit_course %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Gérer Formations</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-book-open"></i>
+            <p>
+              UE
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              {% url 'add_subject' as add_subject %}
+              <a href="{{ add_subject }}" class="nav-link {% if request.path == add_subject %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ajouter UE</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manage_subject' as manage_subject %}
+              {% url 'edit_subject' subject_id as edit_subject %}
+              <a href="{{ manage_subject }}" class="nav-link {% if request.path == manage_subject or request.path == edit_subject %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Gérer UE</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-briefcase"></i>
+            <p>
+              Stages
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              {% url 'add_internship' as add_internship %}
+              <a href="{{ add_internship }}" class="nav-link {% if request.path == add_internship %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ajouter Stage</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manage_internship' as manage_internship %}
+              {% url 'edit_internship' internship_id as edit_internship %}
+              <a href="{{ manage_internship }}" class="nav-link {% if request.path == manage_internship or request.path == edit_internship %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Gérer Stages</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-sliders-h"></i>
+            <p>
+              Préférences
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              {% url 'add_student_preference' as add_student_preference %}
+              <a href="{{ add_student_preference }}" class="nav-link {% if request.path == add_student_preference %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ajouter Préférence Étudiant</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manage_student_preference' as manage_student_preference %}
+              {% url 'edit_student_preference' student_preference_id as edit_student_preference %}
+              <a href="{{ manage_student_preference }}" class="nav-link {% if request.path == manage_student_preference or request.path == edit_student_preference %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Gérer Préférences Étudiants</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'add_staff_preference' as add_staff_preference %}
+              <a href="{{ add_staff_preference }}" class="nav-link {% if request.path == add_staff_preference %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ajouter Préférence Tuteur</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manage_staff_preference' as manage_staff_preference %}
+              {% url 'edit_staff_preference' staff_preference_id as edit_staff_preference %}
+              <a href="{{ manage_staff_preference }}" class="nav-link {% if request.path == manage_staff_preference or request.path == edit_staff_preference %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Gérer Préférences Tuteurs</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tasks"></i>
+            <p>
+              Affectations
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              {% url 'add_assignment' as add_assignment %}
+              <a href="{{ add_assignment }}" class="nav-link {% if request.path == add_assignment %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ajouter Affectation</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manage_assignment' as manage_assignment %}
+              {% url 'edit_assignment' assignment_id as edit_assignment %}
+              <a href="{{ manage_assignment }}" class="nav-link {% if request.path == manage_assignment or request.path == edit_assignment %} active {% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Gérer Affectations</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

@@ -1,0 +1,37 @@
+<!-- add_assignment_template.html --->
+
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Ajouter une Affectation
+{% endblock page_title %}
+{% block main_content %}
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Ajouter une Affectation</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form role="form" action="{% url 'add_assignment' %}" method="post">
+              {% csrf_token %}
+            <div class="card-body">
+              {{ form.as_p }}
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary btn-block">Add Assignment</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+      </div>
+      </div>
+  </div>
+</section>
+<!-- /.content -->
+{% endblock main_content %}

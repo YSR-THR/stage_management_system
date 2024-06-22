@@ -1,0 +1,42 @@
+<!-- staff_template/staff_assignments.html -->
+{% extends 'staff_template/base_template.html' %}
+{% block page_title %}
+Affectations du Tuteur
+{% endblock page_title %}
+{% block main_content %}
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Vos Affectations</h3>
+          </div>
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Étudiant</th>
+                  <th>Stage</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for assignment in assignments %}
+                  <tr>
+                    <td>{{ assignment.id }}</td>
+                    <td>{{ assignment.student.admin.first_name }} {{ assignment.student.admin.last_name }}</td>
+                    <td>{{ assignment.internship.topic }}</td>
+                    <td>{{ assignment.status }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main_content %}
