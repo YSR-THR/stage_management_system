@@ -1,1 +1,1 @@
-web : guinicorn stage_management_system.wsgi
+web : gunicorn stage_management_system.wsgi
