@@ -9,7 +9,48 @@ from .models import CustomUser, Staffs, Courses, Subjects, Students, Internship,
 from .services import gale_shapley_algorithm, calculate_weighted_preferences
 
 def admin_home(request):
-    return render(request,"hod_template/home_content.html")
+    all_student_count = Students.objects.all().count()
+    subject_count = Subjects.objects.all().count()
+    internship_count = Internship.objects.all().count()
+    staff_count = Staffs.objects.all().count()
+
+    
+    subject_list = []
+    subjects = Subjects.objects.all()
+    for subject in subjects:
+        subject_list.append(subject.subject_name)    
+
+    internship_list = []
+    internships = Internship.objects.all()
+    for internship in internships:
+        internship_list.append(internship.topic) 
+
+    # For Saffs
+    staff_name_list=[]
+
+    staffs = Staffs.objects.all()
+    for staff in staffs:
+        staff_name_list.append(staff.admin.first_name)
+
+    # For Students
+    student_name_list=[]
+
+    students = Students.objects.all()
+    for student in students:
+        student_name_list.append(student.admin.first_name)
+
+
+    context={
+        "all_student_count": all_student_count,
+        "subject_count": subject_count,
+        "internship_count": internship_count,
+        "staff_count": staff_count,
+        "subject_list": subject_list,
+        "internship_list" : internship_list,
+        "staff_name_list": staff_name_list,
+        "student_name_list": student_name_list,
+    }
+    return render(request, "hod_template/home_content.html", context)
 
 def add_staff(request):
     return render(request,"hod_template/add_staff_template.html")
