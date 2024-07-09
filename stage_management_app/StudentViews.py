@@ -7,7 +7,15 @@ from .models import StudentPreference, Students, Staffs, Assignment, Subjects
 from django.contrib.auth.decorators import login_required
 
 def student_home(request):
-    return render(request, "student_template/student_home_template.html")
+    if request.user.user_type != '3':  # Ensure it's a student
+        return redirect('student_home')
+
+    student = Students.objects.get(admin=request.user)
+
+    staffs = Staffs.objects.all()
+    for staff in staffs:
+        staff.subjects = Subjects.objects.filter(staff_id=staff.admin.id)
+    return render(request, "student_template/student_home_template.html",{'staffs':staffs,'student':student})
 
 def submit_student_preferences(request):
     if request.user.user_type != '3':  # Ensure it's a student

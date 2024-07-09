@@ -2,12 +2,48 @@
 {% block page_title %}
 Home
 {% endblock page_title %}
-{% block main_content %}
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-      </div>
-    </section>
-    <!-- /.content -->
-{% endblock main_content %}
 
+{% block main_content %}
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Stages Disponibles et Leurs Détails</h3>
+          </div>
+          <div class="card-body table-responsive p-0">
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Domaine</th>
+                    <th>Sujet</th>
+                    <th>Date de Début</th>
+                    <th>Date de Fin</th>
+                    <th>Étudiant</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for internship in internships %}
+                    <tr>
+                      <td>{{ internship.domain }}</td>
+                      <td>{{ internship.topic }}</td>
+                      <td>{{ internship.start_date }}</td>
+                      <td>{{ internship.end_date }}</td>
+                      <td>{{ internship.student_id.admin.get_full_name }}</td>
+                    </tr>
+                  {% empty %}
+                    <tr>
+                      <td colspan="5">Aucun stage disponible</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main_content %}

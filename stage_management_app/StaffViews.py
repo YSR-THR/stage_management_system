@@ -7,7 +7,12 @@ from .models import StaffPreference, Staffs, Students, Assignment, Internship
 from django.contrib.auth.decorators import login_required
 
 def staff_home(request):
-    return render(request, "staff_template/staff_home_template.html")
+    if request.user.user_type != '2':  # Ensure it's a staff
+     return redirect('staff_home')
+
+    staff = Staffs.objects.get(admin=request.user)
+    internships = Internship.objects.all()  # Fetch all internships
+    return render(request, "staff_template/staff_home_template.html",{'staff':staff,'internships': internships})
 
 def submit_staff_preferences(request):
     if request.user.user_type != '2':  # Ensure it's a staff
